@@ -41,7 +41,7 @@ urlImagePost = mainContentDetail.find_all("img", {"class": "lazy"})
 
 if len(urlImagePost) > 0:
     for urlImg in urlImagePost:
-        allURLImage += urlImg["src"] + '\n\n'
+        allURLImage += urlImg["data-src"] + '\n\n'
 else:
     pass
 
