@@ -1,4 +1,6 @@
+#!/usr/bin/python3
 import requests
+import psycopg2
 from bs4 import BeautifulSoup
 
 def getData(url, tagName, className):
@@ -13,6 +15,31 @@ def getData(url, tagName, className):
 
 def getURLNewsLatest(newsLatest):
     return newsLatest.find("a", {"class": "thumb thumb-5x3"})["href"]
+
+# Example:
+# tableName = 'category'
+# values = "2, 'Kinh Doanh'"
+def insertDataCategories():
+    serverName = 'localhost'
+    username = 'postgres'
+    password = 'Faker1412'
+    dbName = 'WebCrawler'
+
+    connection = psycopg2.connect(
+        host = serverName, 
+        database = dbName, 
+        user = username, 
+        password = password
+    )
+
+    cur = connection.cursor()
+    query = """INSERT INTO categories(id, name) VALUES(%s, %s)"""
+    valuesInsert = (1, 'Kinh Doanh')
+    cur.execute(query, valuesInsert)
+    connection.commit()
+
+insertDataCategories()
+
 
 # def findContent(data, typeFind, tagName, attr, valueAttr, getType):
 #     return data.typeFind(tagName, {attr: valueAttr})getType
