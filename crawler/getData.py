@@ -6,7 +6,7 @@
 # import threading
 
 # import re
-from function import getData, getURLNewsLatest
+from function import getData, getURLNewsLatest, checkCategory, insertDataPosts
 
 # get latest post in page vnexpress
 url = 'https://vnexpress.net/'
@@ -46,9 +46,15 @@ else:
     pass
 
 # exportData(categoryPost, titlePost, descriptionPost, allContent, allURLImage)
-print('1. Category: ', categoryPost, '\n\n')
-print('2. Title: ', titlePost, '\n\n')
-print('3. Description: ', descriptionPost, '\n\n')
-print('4. Content: ', allContent, '\n\n')
-print('5. URL Image: ', allURLImage, '\n\n')
+# print('1. Category: ', categoryPost, '\n\n')
+# print('2. Title: ', titlePost, '\n\n')
+# print('3. Description: ', descriptionPost, '\n\n')
+# print('4. Content: ', allContent, '\n\n')
+# print('5. URL Image: ', allURLImage, '\n\n')
+
+categoryId =  checkCategory(categoryPost)
+# print('ID POST: ', categoryId)
+
+# Test insert data table posts
+insertDataPosts(titlePost, descriptionPost, allContent, allURLImage, categoryId)
 
