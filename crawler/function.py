@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 import requests
 import psycopg2
+import re
 from connection import openConnection
 from bs4 import BeautifulSoup
 
@@ -39,9 +41,6 @@ def insertDataCategories():
     cur.execute(query, valuesInsert)
     connection.commit()
 
-# insertDataCategories()
-
-
 # insert data posts table
 def insertDataPosts(*data):
     serverName = 'localhost'
@@ -57,16 +56,26 @@ def insertDataPosts(*data):
     )
 
     cur = connection.cursor()
+    arrCurrentData = getDataFromDB()
+    print('array Data', arrCurrentData)
+
     arrInsert = []
     index = 0
     for param in data:
-        arrInsert.insert(index, str(param))
+        for dataCate in arrCurrentData:
+            if (param != dataCate):
+                print('Data cate: ', dataCate, '\n')
+                print('Input cate: ', param, '\n')
+                print('Can save')
+                arrInsert.insert(index, str(param))
+            else:
+                print('Data cate: ', dataCate, '\n')
+                print('Input cate: ', param, '\n')
+                print('Cannot save')
         index += 1
-        # print('param: --------------------------------------- ', str(param))
-        # dataLength += 1
-    # print('Array Data: ========', arrInsert)
 
-    query = """INSERT INTO posts(title, description, content, images, category_id) VALUES(%s, %s, %s, %s, %s)"""
+    
+    query = """INSERT INTO posts(title, description, content, images, category_id, data_cate) VALUES(%s, %s, %s, %s, %s, %d) WHERE NOT EXISTS (SELECT data_cate FROM posts)"""
     
     valuesInsert = (arrInsert)
     cur.execute(query, valuesInsert)
@@ -103,8 +112,52 @@ def checkCategory(category):
 
     return categoryID
 
+def getDataFromDB():
+    serverName = 'localhost'
+    username = 'postgres'
+    password = 'Faker1412'
+    dbName = 'WebCrawler'
 
+    connection = psycopg2.connect(
+        host = serverName, 
+        database = dbName, 
+        user = username, 
+        password = password
+    )
 
+    cur = connection.cursor()
+    query = """ SELECT data_cate FROM posts """
+    cur.execute(query)
+    print('Row number: ', cur.rowcount)
+    row = cur.fetchone()
+
+    arrData = []
+    index = 0
+
+    while row is not None:
+        # print(row)
+        # row = re.sub("(", "", row)
+        arrData.insert(index, row)
+        index += 1
+        row = cur.fetchone()
+        
+    
+    return arrData
+
+def checkString(string):
+    ex = "toilapython"
+    string = string.lower()
+    ex = ex.lower()
+    if string == ex:
+        print('True')
+    else:
+        print('False')
+
+# testStr = str("Hoài nghi về tham vọng 'Hướng Tây' của Trung Quốc")
+# print(testStr)
+# checkString(testStr)
+
+# getDataFromDB()
 
 # def findContent(data, typeFind, tagName, attr, valueAttr, getType):
 #     return data.typeFind(tagName, {attr: valueAttr})getType

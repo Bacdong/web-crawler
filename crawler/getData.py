@@ -5,7 +5,7 @@
 # import time
 # import threading
 
-# import re
+import re
 from function import getData, getURLNewsLatest, checkCategory, insertDataPosts
 
 # get latest post in page vnexpress
@@ -13,12 +13,14 @@ url = 'https://vnexpress.net/'
 tagName = 'article'
 className = 'item-news full-thumb article-topstory'
 result = getData(url, tagName, className)
+# print(result)
 
 # get detail latest post
 urlDetail = getURLNewsLatest(result)
 tagNameDetail = 'div'
 classNameDetail = 'sidebar-1'
 mainContentDetail = getData(urlDetail, tagNameDetail, classNameDetail)
+# print(mainContentDetail)
 
 # driver = webdriver.Chrome()
 # driver.get(url)
@@ -27,6 +29,8 @@ mainContentDetail = getData(urlDetail, tagNameDetail, classNameDetail)
 #     driver.refresh()
 # driver.quit()
 
+dataCate = mainContentDetail.find("span", {"id": "parentCateDetail"})["data-cate"]
+dataCate = int(dataCate)
 categoryPost = mainContentDetail.find("a")["title"]
 titlePost = mainContentDetail.find("h1", {"class": "title-detail"}).text
 descriptionPost = mainContentDetail.find("p", {"class": "description"}).text
@@ -56,5 +60,4 @@ categoryId =  checkCategory(categoryPost)
 # print('ID POST: ', categoryId)
 
 # Test insert data table posts
-insertDataPosts(titlePost, descriptionPost, allContent, allURLImage, categoryId)
-
+insertDataPosts(titlePost, descriptionPost, allContent, allURLImage, categoryId, dataCate)
