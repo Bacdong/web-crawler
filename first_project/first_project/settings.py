@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'first_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.path.join(BASE_DIR, 'db.mydb'),
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'DjangoDB',
+        'USER': 'postgres',
+        'PASSWORD': 'Faker1412',
         'HOST': '127.0.0.1',
-        'PORT': '8000',
+        'PORT': '',
     }
 }
 
