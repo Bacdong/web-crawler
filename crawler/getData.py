@@ -6,7 +6,7 @@
 # import threading
 
 import re
-from function import getData, getURLNewsLatest, checkCategory, insertDataPosts
+from function import getData, getURLNewsLatest, checkCategory, insertDataPosts, isEmptyData
 
 # get latest post in page vnexpress
 url = 'https://vnexpress.net/'
@@ -29,13 +29,14 @@ mainContentDetail = getData(urlDetail, tagNameDetail, classNameDetail)
 #     driver.refresh()
 # driver.quit()
 
-# dataCate = mainContentDetail.find("span", {"id": "parentCateDetail"})["data-cate"]
+dataCate = mainContentDetail.find("span", {"id": "parentCateDetail"})["data-cate"]
 # dataCate = int(dataCate)
-dataCate = 0;
+# print('Data cate: ', dataCate)
 categoryPost = mainContentDetail.find("a")["title"]
 titlePost = mainContentDetail.find("h1", {"class": "title-detail"}).text
 descriptionPost = mainContentDetail.find("p", {"class": "description"}).text
 contentPost = mainContentDetail.find_all("p", {"class": "Normal"})
+isEmptyData(contentPost)
 
 allContent = ""
 for content in contentPost:
@@ -43,12 +44,18 @@ for content in contentPost:
 
 allURLImage = ""
 urlImagePost = mainContentDetail.find_all("img", {"class": "lazy"})
+isEmptyData(urlImagePost)
 
 if len(urlImagePost) > 0:
     for urlImg in urlImagePost:
         allURLImage += urlImg["data-src"] + '\n\n'
 else:
     pass
+
+isEmptyData(dataCate)
+isEmptyData(categoryPost)
+isEmptyData(titlePost)
+isEmptyData(descriptionPost)
 
 # exportData(categoryPost, titlePost, descriptionPost, allContent, allURLImage)
 # print('1. Category: ', categoryPost, '\n\n')

@@ -3,6 +3,7 @@
 import requests
 import psycopg2
 import re
+import django
 from connection import openConnection
 from bs4 import BeautifulSoup
 
@@ -57,23 +58,29 @@ def insertDataPosts(*data):
 
     cur = connection.cursor()
     arrCurrentData = getDataFromDB()
-    print('array Data', arrCurrentData)
+    arrCurrentData = str(arrCurrentData)
+    x = re.sub(",", "", arrCurrentData)
+    print('array Data', x)
 
     arrInsert = []
     index = 0
     for param in data:
         for dataCate in arrCurrentData:
             if (param != dataCate):
-                print('Data cate: ', dataCate, '\n')
-                print('Input cate: ', param, '\n')
-                print('Can save')
-                arrInsert.insert(index, str(param))
+                # print('Data cate: ', dataCate, '\n')
+                # print('Input cate: ', param, '\n')
+                # print('Can save')
+                temp = replaceStringData(str(param))
+                arrInsert.insert(index, temp)
+                # arrInsert.insert(index, str(param))
             else:
-                print('Data cate: ', dataCate, '\n')
-                print('Input cate: ', param, '\n')
+                # print('Data cate: ', dataCate, '\n')
+                # print('Input cate: ', param, '\n')
                 print('Cannot save')
-        index += 1
+        index = index + 1
 
+    print('Array Insert: ')
+    print(arrInsert)
     
     query = """INSERT INTO posts(title, description, content, images, category_id, data_cate) VALUES(%s, %s, %s, %s, %s, %d) WHERE NOT EXISTS (SELECT data_cate FROM posts)"""
     
@@ -152,6 +159,19 @@ def checkString(string):
         print('True')
     else:
         print('False')
+
+
+def isEmptyData(dataElement):
+    if dataElement != "" or dataElement is not None:
+        dataElement = dataElement;
+    else:
+        dataElement = 0;
+    return dataElement
+
+def replaceStringData(dataString):
+    tempStr = re.sub("\"", "", dataString)
+    return tempStr
+
 
 # testStr = str("Hoài nghi về tham vọng 'Hướng Tây' của Trung Quốc")
 # print(testStr)
