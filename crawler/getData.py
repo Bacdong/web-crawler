@@ -29,8 +29,9 @@ mainContentDetail = getData(urlDetail, tagNameDetail, classNameDetail)
 #     driver.refresh()
 # driver.quit()
 
-dataCate = mainContentDetail.find("span", {"id": "parentCateDetail"})["data-cate"]
-dataCate = int(dataCate)
+# dataCate = mainContentDetail.find("span", {"id": "parentCateDetail"})["data-cate"]
+# dataCate = int(dataCate)
+dataCate = 0;
 categoryPost = mainContentDetail.find("a")["title"]
 titlePost = mainContentDetail.find("h1", {"class": "title-detail"}).text
 descriptionPost = mainContentDetail.find("p", {"class": "description"}).text
