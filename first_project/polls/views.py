@@ -26,7 +26,7 @@ def detail(request, question_id):
         raise Http404("Question does not exist!")
     return render(request, 'polls/detail.html', {'question': question})
 
-def result(request, question_id):
+def results(request, question_id):
     question = get_object_or_404(Question, pk = question_id)
     return render(request, 'polls/results.html', {'question': question})
 
@@ -50,7 +50,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """ Return the last five  published question. """
-        return Question.objects.order_by(-pub_date)[:5]
+        return Question.objects.order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
     model = Question
