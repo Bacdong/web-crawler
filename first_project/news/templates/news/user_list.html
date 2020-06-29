@@ -1,0 +1,7 @@
+<h1>This is user_list.html page.</h1>
+
+{% for user in list %}
+    <p>ID: {{ user.id }}</p>
+    <p>Fullname: {{ user.fullName }}</p>
+    <hr>
+{% endfor %}
