@@ -1,0 +1,15 @@
+<h1>This is article_list.html page.</h1>
+
+{% for article in list %}
+    <div>
+        <p><b>ID:</b> {{ article.id }}</p>
+        <p><b>Head Line:</b> {{ article.headLine }}</p>
+        <p><b>Content:</b> {{ article.content }}</p>
+        <p><b>Published:</b> {{ article.pub_date }}</p>
+        <p>
+            <b>Post by:</b> 
+            <a href="../users/">{{ article.reporter.fullName }}</a>
+        </p>
+    </div>
+    <hr>
+{% endfor %}

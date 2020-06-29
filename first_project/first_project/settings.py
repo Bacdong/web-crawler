@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'data_crawler',
     'news',
     'polls.apps.PollsConfig',
     'django.contrib.admin',

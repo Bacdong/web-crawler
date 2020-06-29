@@ -32,3 +32,9 @@ def user_list(request):
     list = Reporter.objects.all().order_by('-id').reverse()
     data = {'list': list}
     return render(request, 'news/user_list.html', data)
+
+
+def article_list(request):
+    list = Article.objects.all().order_by('-pub_date')
+    data = {'list': list}
+    return render(request, 'news/article_list.html', data)
