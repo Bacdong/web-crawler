@@ -1,5 +1,5 @@
 
-### Crawler website with requests and beautifulsoup4(bs4) library in python ###
+### Web Crawler with requests and beautifulsoup4(bs4) library in python ###
 
 #### Installing for Development: ####
 * IDE: 
