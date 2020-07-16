@@ -18,9 +18,9 @@
 * To run:
 ```
 - OPEN TERMINAL:
+  + cd crawler
   + pip install requests // (pip3 install requests)
   + pip install beautifulsoup4 // (pip3 install beautifullsoup4) 
-  + cd crawler
 - OPEN getData.py file:
   ( * If you no need save data into database:
       . Comment some function  use to connect database: Eg. insertData..(),...
