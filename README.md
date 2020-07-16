@@ -19,11 +19,11 @@
 ```
 - OPEN TERMINAL:
   + pip install requests // (pip3 install requests)
-  + pip install beautifullsoup4 // (pip3 install beautifullsoup4) 
+  + pip install beautifulsoup4 // (pip3 install beautifullsoup4) 
   + cd crawler
 - OPEN getData.py file:
   ( * If you no need save data into database:
-      . Comment some function use to connect database: Eg. insertData..(),...
+      . Comment some function  use to connect database: Eg. insertData..(),...
       . No need to worry about connecting and dealing with databases.
   )
   - Replace current available "url" variable in file with the one url address you want.
