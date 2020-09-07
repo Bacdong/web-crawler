@@ -4,7 +4,7 @@
 #### Installing for Development: ####
 * IDE: 
 ```
-- Download python (https://www.python.org/downloads/)
+- Download python [at here](https://www.python.org/downloads/)
 - Install IDE support compile Python: VSCode, Pycharm, Sublime Text, ...
 ```
 * Extension for IDE:
